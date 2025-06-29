@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>sks_mod 변화 표</title>
+    <style>
+        table { border-collapse: collapse; }
+        th, td { border: 1px solid #888; padding: 4px 8px; }
+        th { background: #eee; }
+    </style>
+    <script src="scripts/cdhsp.js"></script>
+</head>
+<body>
+    <h2>sks_mod 값 변화 (420~2800)</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>SKS</th>
+                <th>2.5</th>
+                <th>1.5</th>
+            </tr>
+        </thead>
+        <tbody id="result"></tbody>
+    </table>
+    <script defer>
+        // window.addEventListener('DOMContentLoaded', function()
+         {
+            // document.write('Loading...');
+            const tbody = document.getElementById('result');
+
+            let stats = new StatsCalc(100);
+
+            let prev = null;
+            for (let sks = 420; sks <= 2800; sks++) {
+                let GCDmod = stats.sksMod(sks).toFixed(2);
+                if (GCDmod !== prev) {
+                    let GCD15 = stats.sksMod(sks, 1.5).toFixed(2);
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `<td>${sks}</td><td>${GCDmod}</td><td>${GCD15}</td>`;
+                    tbody.appendChild(tr);
+                    prev = GCDmod;
+                }
+            }
+        }
+    // );
+    </script>
+</body>
+</html>

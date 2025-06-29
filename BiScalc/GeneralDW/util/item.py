@@ -22,10 +22,11 @@ class ITEMTYPE(Enum):
     necklace = 'C'
     bracelets = 'C'
     ring = 'C'
+    etc = '0'
 
 class ITEM():
-    def __init__(self, type, ): # -> None:
-        self.type
+    def __init__(self, type=ITEMTYPE.etc): # -> None:
+        self.type = type
         self.attr
         self.vital
         self.CRT
@@ -34,39 +35,27 @@ class ITEM():
         self.SKS
         self.TenPie
         self.haste
+        self.matA
+        self.matB
         pass
-
 
 def getItemsetsFromDB(path):
     wb = openpyxl.load_workbook(path)
 
     # sheet = wb['DB']
-    sheet = wb[0]  # Assuming the first sheet is the one we want
+    sheet = wb[wb.sheetnames[0]]  # Assuming the first sheet is the one we want
     # mr = sheet.max_row
     # mc = sheet.max_column
 
     # Item Data
-    item_dict = {}
+    item_dict = []
+    headers = [cell.value for cell in sheet[1]]  # Get headers from the first row
     for row in sheet.iter_rows(2, values_only=True):
         # print(row)
         # (직군, 부위, name, Attr, vital, 직격, 극대, 의지, 시속, 불굴신앙, 속성, Haste, 마테)
-        직군 = row[0]
-        부위 = row[1]
-        name = row[2]
+        row_dict = {headers[i]: row[i] for i in range(len(headers))}
+        item_dict.append(row_dict)
 
-        if 직군 not in (item_dict):
-            item_dict[직군] = {}
-            pass
-
-        if 부위 not in (item_dict[직군]):
-            item_dict[직군][부위] = {}
-            pass
-
-        buffer = [0 if cell is None else cell for cell in row[3:]]
-
-        item_dict[직군][부위][name] = buffer  # .copy()
-
-        # item_dict[직군][부위][name] = [Attr, vital, 직격, 극대, 의지, 시속, 불굴, 속성, Haste, 마테[1:5]]
     return item_dict
 
 
