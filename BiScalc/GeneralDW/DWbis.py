@@ -22,7 +22,7 @@ df = pd.read_excel(path + '\\' + file)
 df.fillna(value=0, inplace=True)  # Fill NaN values with None
 print(df.head())  # Display the first few rows for verification
 
-df2 = df[df["획득"].isin(['제작'])]
+items_week1 = df[df["획득"].isin(['제작', '석판', '일반'])]
 
 
 class Character(StatsCalc):

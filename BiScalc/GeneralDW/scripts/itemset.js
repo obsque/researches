@@ -1,0 +1,4 @@
+
+function ItemSet() {
+    this.items = [];
+};

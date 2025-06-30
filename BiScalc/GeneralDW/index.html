@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>sks_mod 변화 표</title>
+    <style>
+        body {
+            background-color: onyx;
+        }
+        table { border-collapse: collapse; }
+        th, td { border: 1px solid #888; padding: 4px 8px; }
+        th { background: #eee; }
+        div {
+            box-sizing: border-box;
+            /* margin: auto; */
+        }
+        #main-container {
+            /* display: grid; */
+            /* display: flex; */
+            /* grid-template-columns: 1fr 1fr; */
+            max-width: 800px;
+            /* margin: auto; */
+            /* width: 100%; */
+        }
+        #equipment {
+            display: flex;
+            margin-left: auto;
+            margin-right: auto;
+            flex-wrap: wrap;
+            /* padding: 10px; */
+            gap: 10px;
+            justify-content: center;
+        }
+        .item {
+            /* display: inline-block; */
+            /* position: relative; */
+            min-width: 150px;
+            min-height: 30px;
+            margin: 7px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            margin-left: auto;
+            margin-right: auto;
+
+        }
+        .left {
+            /* grid-column: 1; */
+            margin-left: auto;
+            /* margin-right: auto; */
+        }
+        .right {
+            /* grid-column: 2; */
+            margin-right: auto;
+        }
+    </style>
+    <script src="scripts/cdhsp.js"></script>
+    <script src="scripts/itemset.js"></script>
+</head>
+<body>
+    <div id="main-container">
+        <div id="stats"></div>
+        <div id="weapon"></div>
+        <div id="equipment">
+            <div id="left-side"></div>
+            <div id="right-side"></div>
+        </div>
+        <div id="food"></div>
+        <script>
+            function CreateBlock(tid, id) {
+                const target = document.getElementById(tid);
+                const block = document.createElement('table');
+                block.id = id;
+                block.className = 'item';
+                // block.style.gridRow = row;
+                // return block;
+                block.innerHTML = `
+                    <thead>
+                        <tr>
+                            <th colspan="2">${id}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>아이템</td>
+                            <td>수량</td>
+                        </tr>
+                    </tbody>`;
+                target.appendChild(block);
+            }
+            window.addEventListener('DOMContentLoaded', function() {
+                // const target = document.getElementById('main-container');
+                CreateBlock('weapon', 'weapon');
+                // CreateBlock('weapon', 'off');
+                CreateBlock('left-side', 'head');
+                CreateBlock('left-side', 'body');
+                CreateBlock('left-side', 'hand');
+                CreateBlock('left-side', 'legs');
+                CreateBlock('left-side', 'feet');
+                CreateBlock('right-side', 'ears');
+                CreateBlock('right-side', 'neck');
+                CreateBlock('right-side', 'wrist');
+                CreateBlock('right-side', 'ring-right');
+                CreateBlock('right-side', 'ring-left');
+                CreateBlock('food', 'food');
+            });
+
+        </script>
+
+    </div>
+
+    <script defer>
+    </script>
+</body>
+</html>

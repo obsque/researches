@@ -23,7 +23,10 @@ file_path = os.path.join(path, file)
 print(f'\nLoading {file} from {path}...')
 # Load the Excel file
 
+### by dict/list
 item_dict = getItemsetsFromDB(file_path)
 
-items_week1 = [item for item in item_dict if item['획득'] == '제작' or item['획득'] == '석판']
+items_week1 = [item
+               for item in item_dict
+               if item['획득'] == '제작' or item['획득'] == '석판' or item['획득'] == '일반']
 print(f'Loaded {len(items_week1)} items from {file_path}.')
