@@ -46,7 +46,7 @@ items_week1 = [item
 len(items_week1)
 print(f'Loaded {len(items_week1)} items from {file_path}.')
 
-base.equips['weapon'] = ITEM(ITEMTYPE.weapon)
+# base.equips['weapon'] = ITEM(ITEMTYPE.weapon)
 
 석판상한 = 900
 

@@ -1,21 +1,22 @@
+import copy
 import openpyxl
-from enum import Enum
+from enum import *
 
 class ArmType(Enum):
-    a수호자 = 1
-    b학살자 = 2
-    c타격대 = 3
-    d정찰대 = 4
-    e유격대 = 5
-    f마술사 = 6
-    g치유사 = 7
+    a수호자 = '1수호자'
+    b학살자 = '2학살자'
+    c타격대 = '3타격대'
+    d정찰대 = '4정찰대'
+    e유격대 = '5유격대'
+    f마술사 = '6마술사'
+    g치유사 = '7치유사'
     pass
 class AccType(Enum):
-    a수호자 = 1
-    b공격대 = 2
-    c유격대 = 3
-    d마술사 = 4
-    e치유사 = 5
+    a수호자 = '1수호자'
+    b공격대 = '2공격대'
+    c유격대 = '3유격대'
+    d마술사 = '4마술사'
+    e치유사 = '5치유사'
     pass
 JOB = {
     'PLD': [ ArmType.a수호자, AccType.a수호자 ],
@@ -43,14 +44,16 @@ JOB = {
 iequips = ['weapon', 'head', 'body', 'hands', 'legs', 'feet',
            'earrings', 'necklace', 'bracelets', 'ring1', 'ring2', 'food']
 
-istats = ['attr', 'vital'
+istats = ['attr'
+        #   , 'vital'
           , 'dh', 'crit', 'det', 'sks', 'tncpt'
           , 'matA', 'matB'
         #   , 'Elemental', 'haste'
           ] #, 'materia']
-eStats = {'attr': 0, 'vital': 1,
-          'dh': 2, 'crit': 3, 'det': 4, 'sks': 5, 'tncpt': 6,
-          'matA': 7, 'matB': 8,
+eStats = {'attr': 0
+        #   , 'vital': 1
+          , 'dh': 2, 'crit': 3, 'det': 4, 'sks': 5, 'tncpt': 6
+          , 'matA': 7, 'matB': 8,
         #   'Elemental': 9, 'haste': 10,
           }
 
@@ -84,11 +87,11 @@ class Specs:
 
 # class ITEM(Specs):
 class ITEM():
-    def __init__(self, type=ITEMTYPE.etc): # -> None:
+    def __init__(self): # -> None:
         # super().__init__()
-        self.type = type
+        self.Obtain = 0
+        self.Type = 0
         self.slot = 0
-
         self.specs = {x:0 for x in istats}  # Initialize all stats to 0
         pass
 
@@ -103,13 +106,18 @@ def getItemsetsFromDB(path):
     # Item Data
     item_dict = []
     headers = [cell.value for cell in sheet[1]]  # Get headers from the first row
-    print(f'{headers}')
+    # print(f'{headers}')
+    ### ['획득', '부위', '직군', '주', '극', '의', '시', '직', '굴/신']
+    temp = ITEM()
     for row in sheet.iter_rows(2, values_only=True):
-        temp = ITEM(type=ITEMTYPE(row[0]))
         # print(row)
-        # (직군, 부위, name, Attr, vital, 직격, 극대, 의지, 시속, 불굴신앙, 속성, Haste, 마테)
-        row_dict = {headers[i]: row[i] for i in range(len(headers))}
-        item_dict.append(row_dict)
+        # row_dict = {headers[i]: row[i] for i in range(len(headers))}
+        # item_dict.append(row_dict)
+        temp.Obtain = row[0]
+        temp.slot = row[1]
+        temp.Type = row[2] if row[2] is not None else temp.Type
+        temp.specs = {istats[i]: row[i+3] for i in range(6)}
+        item_dict.append(copy.copy(temp))
 
     return item_dict
 
