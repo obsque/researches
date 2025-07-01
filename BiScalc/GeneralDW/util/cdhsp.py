@@ -7,9 +7,30 @@ LevelMod = {
         100 : dict(main=440, sub=420, div=2800),
         }
 
-class StatsCalc:
+class Stats():
+    def __init__(self, attr=0, dh=0, crit=0, det=0, sks=0, tenacity=0, piety=0, defence=0) -> None:
+        self.attr = attr
+        self.dh = dh
+        self.crit = crit
+        self.det = det
+        self.sks = sks
+        self.tenacity = tenacity
+        self.piety = piety
+        self.defence = defence
+        pass
+
+class StatsCalc(Stats):
     def __init__(self, level=100) -> None:
         self.level = level
+        super().__init__(
+            0
+            , dh = LevelMod[level]['sub']
+            , crit = LevelMod[level]['sub']
+            , det = LevelMod[level]['main']
+            , sks = LevelMod[level]['sub']
+            , tenacity = LevelMod[level]['sub']
+            , piety = LevelMod[level]['sub']
+            , defence = 0)
         pass
 
     def calcMain(self, mul, stat) -> float:
@@ -99,6 +120,10 @@ class StatsCalc:
         # print('haste {}', calc)
         return calc
 
+    # def ExpDmgSum(attr, dh, crit, det, sks, tncpt, haste, levelmod=70, GCD=250):
+    #     calc = StatsCalc(levelmod)
+    #     GCDmod = calc.sks_mod(sks, GCD)
+    #     result = attr
     def ExpDmgSum(self):
         # calc = StatsCalc(levelmod)
         result = 10000
@@ -114,19 +139,6 @@ class StatsCalc:
     def mitigationP(self, defence):
         calc = (100-math.floor(15*defence/LevelMod[self.level]['div']))/100
         return calc
-
-
-def ExpDmgSum(attr, dh, crit, det, sks, tncpt, haste, levelmod=70, GCD=250):
-    calc = StatsCalc(levelmod)
-    GCDmod = calc.sks_mod(sks, GCD)
-    result = attr
-    result *= calc.dh_exDmg(dh)
-    result *= calc.crit_exDmg(crit)
-    result *= calc.det_exDmg(det)
-    result *= calc.sks_exDmg(sks)
-    result *= calc.ten_exDmg(tncpt)
-    result *= calc.haste_exDmg(haste, GCD=GCDmod)
-    return result
 
 
 def test():

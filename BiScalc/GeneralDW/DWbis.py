@@ -5,7 +5,7 @@ import time
 import itertools
 
 from util.cdhsp import *
-from util.item import *  # ITEM, ITEMTYPE
+from util.xiv import *  # ITEM, ITEMTYPE
 # from util.calcs import *
 
 level = 100
@@ -23,6 +23,7 @@ df.fillna(value=0, inplace=True)  # Fill NaN values with None
 print(df.head())  # Display the first few rows for verification
 
 items_week1 = df[df["획득"].isin(['제작', '석판', '일반'])]
+
 
 
 class Character(StatsCalc):

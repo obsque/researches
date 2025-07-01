@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>sks_mod 변화 표</title>
+    <!-- <link rel="stylesheet" href="style/main.css"> -->
     <style>
         body {
             background-color: onyx;
@@ -59,11 +60,32 @@
 </head>
 <body>
     <div id="main-container">
-        <div id="stats"></div>
+        <div id="stats">
+            <div id="attribute">
+                <label>주 능력치</label>
+                <input class="stats" type="number" value="4838" min="420" placeholder="주 능력치" oninput="" onchange="">
+            </div>
+            <div id="critical-hit">
+                <label>극대화</label>
+                <input class="stats" type="number" value="420" min="420" placeholder="극대화" oninput="updateCriticalHit(this.value)" onchange="if(this.value === '') this.value = this.min; updateCriticalHit(this.value)">
+            </div>
+            <div id="determination">
+                <label>의지력</label>
+                <input class="stats" type="number" value="440" min="440" placeholder="의지력" oninput="updateDetermination(this.value)" onchange="if(this.value === '') this.value = this.min; updateDetermination(this.value)">
+            </div>
+            <div id="direct-hit">
+                <label>직격</label>
+                <input class="stats" type="number" value="420" min="420" placeholder="직격" oninput="updateDirectHit(this.value)" onchange="if(this.value === '') this.value = this.min; updateDirectHit(this.value)">
+            </div>
+            <div id="skill-speed">
+                <label>시전 속도</label>
+                <input class="stats" type="number" value="420" min="420" placeholder="시전 속도" oninput="updateSkillSpeed(this.value)" onchange="if(this.value === '') this.value = this.min; updateSkillSpeed(this.value)">
+            </div>
+        </div>
         <div id="weapon"></div>
         <div id="equipment">
-            <div id="left-side"></div>
-            <div id="right-side"></div>
+            <div id="armor left-side"></div>
+            <div id="accs right-side"></div>
         </div>
         <div id="food"></div>
         <script>
