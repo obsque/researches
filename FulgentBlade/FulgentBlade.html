@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Page Title</title>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <!-- <script src="myscript.js"></script> -->
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #777;
+        margin: 0;
+        padding: 20px;
+      }
+      input {
+        font-size: 14pt;
+        height: 60px;
+        width: 120px;
+        box-sizing: border-box;
+        &#step {
+          text-align: center;
+        }
+      }
+      div {
+        display: block;
+        box-sizing: border-box;
+      }
+      #control {
+        display: flex;
+        justify-content: center;
+      }
+      #container {
+        position: relative;
+        background-image: url("./pasted-from-clipboard.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-size: 508px;
+        background-position: center;
+        align-items: center;
+        width: 600px;
+        height: 600px;
+        margin: auto;
+        justify-content: center;
+
+      }
+      .field {
+        position: absolute;
+        display: grid;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        /* background-color: #fff; */
+        /* padding: 20px; */
+        /* box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.2); */
+      }
+      .exa {
+        display: none;
+        --light: 1px solid rgba(255, 255, 0, 0.7);
+        --dark: 1px solid rgba(255, 0, 255, 0.7);
+        background-color: rgba(0,0,0,0.1);
+        &.inner {
+          border: var(--light);
+        }
+        &.outer {
+          border: var(--dark);
+        }
+        &.top {
+          grid-row: 1;
+          grid-column: 1/11;
+          /* width: 100% */
+        }
+        &.left {
+          grid-column: 1;
+          grid-row: 1/11;
+        }
+        &.right {
+          grid-column: 10;
+          grid-row: 1/11;
+        }
+      }
+      .svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events:none;
+      }
+
+    </style>
+</head>
+<body>
+  <div id="control">
+    <input type="button" value="◀" onclick="Prev()">
+    <input type="button" value="★" onclick="New()">
+    <input type="text" id="step" value="0" width="60px">
+    <input type="button" value="▶" onclick="Next()">
+  </div>
+  <div id="container">
+    <div class="svg">
+      <svg id="baseline" width="100%" height="100%" viewBox="0 0 800 800">
+        <line x1="50%" y1="0" x2="50%" y2="100%" stroke="red" stroke-width="1" stroke-dasharray="7,3" />
+        <line x1="0" y1="50%" x2="100%" y2="50%" stroke="red" stroke-width="1" stroke-dasharray="7,3" />
+      </svg>
+    </div>
+    <div class="field st">
+      <div class="svg">
+        <svg class="draw st" width="100%" height="100%" viewBox="0 0 800 800">
+        </svg>
+      </div>
+      <div class="exa inner left"></div>
+      <div class="exa inner top"></div>
+      <div class="exa inner right"></div>
+      <div class="exa outer left"></div>
+      <div class="exa outer top"></div>
+      <div class="exa outer right"></div>
+    </div>
+    <div class="field diag">
+      <div class="svg">
+        <svg class="draw diag" width="100%" height="100%" viewBox="0 0 800 800">
+        </svg>
+      </div>
+      <div class="exa inner left"></div>
+      <div class="exa inner top"></div>
+      <div class="exa inner right"></div>
+      <div class="exa outer left"></div>
+      <div class="exa outer top"></div>
+      <div class="exa outer right"></div>
+    </div>
+  </div>
+  <script defer>
+    function UpdateStep(newStep) {
+      const stepInput = document.getElementById("step");
+      stepInput.value = newStep;
+    }
+    function Next() {
+      const stepInput = document.getElementById("step");
+      let currentStep = parseInt(stepInput.value);
+      if (currentStep < 12) {
+        currentStep++;
+        UpdateStep(currentStep);
+      }
+    }
+    function Prev() {
+      const stepInput = document.getElementById("step");
+      let currentStep = parseInt(stepInput.value);
+      if (currentStep > 0) {
+        currentStep--;
+        UpdateStep(currentStep);
+      }
+    }
+    function AppendLine(idx, hv, pos, swidth=0.7) {
+      // const canvas = document.getElementById('draw');
+      const canvas = document.getElementsByClassName('draw')[idx];
+      // Create a new SVG line element properly using setAttribute
+      const line1 = document.createElementNS("http://www.w3.org/2000/svg", "line");
+
+      let dir1 = (hv == '1' ? 'y' : 'x');
+      let dir2 = (hv == '1' ? 'x' : 'y');
+      line1.setAttribute(`${dir1}1`, "0%");
+      line1.setAttribute(`${dir2}1`, pos);
+      line1.setAttribute(`${dir1}2`, "100%");
+      line1.setAttribute(`${dir2}2`, pos);
+      line1.setAttribute("stroke", "white");
+      line1.setAttribute("stroke-width", swidth);
+      canvas.appendChild(line1);
+    }
+    function DrawBaseLine(hv, pos) {
+      const base = document.getElementById('baseline');
+      let dir1 = (hv == '1' ? 'y' : 'x');
+      let dir2 = (hv == '1' ? 'x' : 'y');
+      // Create a new SVG line element properly using setAttribute
+      const line0 = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line0.setAttribute(`${dir1}1`, "45%");
+      line0.setAttribute(`${dir2}1`, pos);
+      line0.setAttribute(`${dir1}2`, "55%");
+      line0.setAttribute(`${dir2}2`, pos);
+      line0.setAttribute("stroke", "rgba(255,255,255,0.3)");
+      line0.setAttribute("stroke-width", 2);
+      line0.setAttribute("stroke-linejoin", "round");
+      // line0.setAttribute("stroke-dasharray", "3,3,3");
+      base.appendChild(line0);
+      const line2 = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line2.setAttribute(`${dir1}1`, "45%");
+      line2.setAttribute(`${dir2}1`, pos);
+      line2.setAttribute(`${dir1}2`, "55%");
+      line2.setAttribute(`${dir2}2`, pos);
+      line2.setAttribute("stroke", "red");
+      line2.setAttribute("stroke-width", 1);
+      line2.setAttribute("stroke-dasharray", "3,3,3");
+      base.appendChild(line2);
+    }
+    function New() {
+      UpdateStep(0);
+      let PosDir = Math.floor(Math.random() * 4);
+      let OutIn = Math.floor(Math.random() * 7) > 4;
+      let IO = (OutIn > 0 ? -1 : 1);
+
+      let div = Math.floor(PosDir / 2); // 01 DA, 23 BC
+      let mod = Math.floor(PosDir % 2); // 02 DB, 13 AC
+      let imod = Math.floor((PosDir + 1) % 2);
+
+      let div2 = (div == 0 ? -1 : 1); // 01 DA, 23 BC
+      let mod2 = (mod == 0 ? -1 : 1); // 02 DB, 13 AC
+      console.log(PosDir, OutIn, IO, div, mod,imod, `2:${div2}, ${mod2}`);
+
+
+      // Create a new div element for the "st" field
+      const stField = document.getElementsByClassName("field st")[0];
+      const canvas = document.getElementsByClassName('draw')[0];
+      canvas.innerHTML="";
+
+      // stField.style.rotate = `${dir}deg`;
+      // stField.innerHTML = "";
+      AppendLine(0, imod, `${(5 + div2*(Math.SQRT2 + IO*2))*10}%`, 2);
+      // let l1 = 5 - 2*mod2;
+      // let l2 = 5 + 2*mod2;
+      AppendLine(0, mod, `${(5 - 2*mod2)*10}%`, 2);
+      AppendLine(0, mod, `${(5 + 2*mod2)*10}%`, 2);
+
+      // Create a new div element for the "diag" field
+      const diagField = document.getElementsByClassName("field diag")[0];
+      diagField.style.rotate = '-45deg'; //`${dir + diagrot}deg`;
+      // diagField.innerHTML = `${dir + diagrot}deg`;
+      const canvas2 = document.getElementsByClassName('draw')[1];
+      canvas2.innerHTML="";
+
+      // AppendLine(1, mod, `${(5 - Math.SQRT2 - 2)*10}%`, 2);
+      // AppendLine(1, imod, `${(5 - 2*mod2)*10}%`, 2);
+      // AppendLine(1, mod, `${(5 + 2*mod2)*10}%`, 2);
+      // AppendLine(1, 0, `20%`, 2);
+      // AppendLine(1, 1, '20%', 2);
+      // AppendLine(1, 0, '60%', 2);
+    }
+    function UpdateStep(step) {
+      const field = document.getElementById('step');
+      field.value = step;
+
+    }
+
+    // This script will be executed after the HTML is fully loaded
+    document.addEventListener("DOMContentLoaded", function() {
+      New();
+      DrawBaseLine(0, `${50 - Math.SQRT2*10}%`);
+      DrawBaseLine(0, `${50 + Math.SQRT2*10}%`);
+      DrawBaseLine(1, `${50 - Math.SQRT2*10}%`);
+      DrawBaseLine(1, `${50 + Math.SQRT2*10}%`);
+    });
+    // window.addEventListener("resize", function() {
+      // 예시: 창 크기 변경 시 콘솔에 현재 크기 출력
+      // console.log("Window resized to: " + window.innerWidth + "x" + window.innerHeight);
+      // window.innerHeight;
+      // let fieldobj = document.getElementById("container");
+      // fieldobj.style.backgroundPositionY = `-${window.innerHeight*0.01}px`;
+      // 필요하다면 여기서 레이아웃 조정 코드 추가
+    // });
+
+
+
+
+  </script>
+</body>
+</html>

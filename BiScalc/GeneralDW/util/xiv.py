@@ -54,10 +54,10 @@ class Slot(Enum):
     i반지 = 'x반지'
     pass
 
-# iequips = ['weapon', 'head', 'body', 'hands', 'legs', 'feet',
-#            'earrings', 'necklace', 'bracelets', 'ring1', 'ring2', 'food']
-iequips = ['0무기', '1머리', '2몸통', '3손', '4다리', '5발',
-           'u귀', 'v목', 'w팔', 'x반지', 'food']
+iequips = ['weapon', 'head', 'body', 'hands', 'legs', 'feet',
+           'earrings', 'necklace', 'bracelets', 'ring1', 'ring2', 'food']
+dequips = ['0무기', '1머리', '2몸통', '3손', '4다리', '5발',
+           'u귀', 'v목', 'w팔', 'x반지', '반지2', 'food']
 
 istats = ['attr'
         #   , 'vital'

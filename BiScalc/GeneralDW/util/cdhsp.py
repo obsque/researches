@@ -1,10 +1,10 @@
 import math
 
 LevelMod = {
-        70 : dict(main=292, sub=364, div=900),
-        80 : dict(main=340, sub=380, div=1300),
-        90 : dict(main=390, sub=400, div=1900),
-        100 : dict(main=440, sub=420, div=2800),
+        70 : dict(main=292, sub=364, div=900, mA = 16, mB=6),
+        80 : dict(main=340, sub=380, div=1300, mA = 24, mB=8),
+        90 : dict(main=390, sub=400, div=1900, mA = 36, mB=12),
+        100 : dict(main=440, sub=420, div=2800, mA = 54, mB=18),
         }
 
 class Stats():

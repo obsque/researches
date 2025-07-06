@@ -3,9 +3,9 @@ import pandas as pd
 from datetime import datetime
 import time
 import itertools
-from item import *  # ITEM, ITEMTYPE
-from cdhsp import *
-from calcs import *
+from util.xiv import *  # ITEM, ITEMTYPE
+from util.cdhsp import *
+# from util.calcs import *
 
 path = r'E:\Users\i\Documents\My Games\FINAL FANTASY XIV - KOREA\docs\7황금'
 # file = r'730items.xlsx'
