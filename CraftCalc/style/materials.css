@@ -1,0 +1,56 @@
+#timetable {
+  display: flex;
+  align-items: center;
+
+  img {
+    margin: auto;
+  }
+}
+
+#materials {
+  display: grid;
+  width: fit-content;
+  margin: auto;
+
+  table {
+
+    th,td {
+      border: 0;
+      padding: 0;
+      /* border: 1px dotted black; */
+      border-radius: 3px;
+      color: #eed;
+      text-shadow: black 0px 0px 1em;
+    }
+    thead {
+      th {
+        position: sticky;
+        top: 0;
+        background-color: gray;
+      }
+      th:not(.name) {
+        width: 3em;
+      }
+    }
+    tbody {
+      height: 50%;
+      overflow-y: scroll;
+
+      tr {
+        background-color: dimgray;
+      }
+      th {
+        width: 5em;
+      }
+      td:not(.name) {
+        text-align: center;
+      }
+      td.name {
+        width: 120px;
+        padding-left: 0.5em;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}

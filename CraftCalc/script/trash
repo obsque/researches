@@ -1,0 +1,28 @@
+[...Array(1000)].map((_,i) =>{
+	return i;
+});
+
+
+function RoleTable() {
+  const div_roles = document.getElementById('roles');
+
+  // Column-head
+  for (let i = 0; i < SLOT_NAMES.length; i++) {
+    const d = document.createElement('div');
+    d.className = 'th col';
+    d.style.gridColumn = `${i + 1}`;
+    d.innerHTML = `<span>${SLOT_NAMES[i]}</span>`;
+
+    div_roles.appendChild(d);
+  }
+  // Row-head
+  for (let i = 0; i < GEAR_TYPES.length; i++) {
+    const d = document.createElement('div');
+    d.className = 'th row';
+    // d.style.gridColumn = `${i + 1}`;
+    d.style.gridRow = `${i + 1}`;
+    d.innerHTML = `<span>${GEAR_TYPES[i].name}</span>`;
+
+    div_roles.appendChild(d);
+  }
+}

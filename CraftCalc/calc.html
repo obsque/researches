@@ -1,15 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>Timeline Example</title>
+  <title>TITLE</title>
 
-  <link rel="stylesheet" href="style/styles.css">
+  <!-- <link rel="stylesheet" href="style/job_icons.css"> -->
+  <link rel="stylesheet" href="style/0.css">
+  <link rel="stylesheet" href="style/frame.css">
+  <link rel="stylesheet" href="style/roles.css">
+  <link rel="stylesheet" href="style/materials.css">
+  <script src="script/csv2json.js"></script>
+  <!-- <script src="script/job_color.js"></script> -->
+  <script src="script/materials.js"></script>
+  <script src="script/crafting.js"></script>
+  <script src="script/functions.js"></script>
+
 </head>
 <body>
-  <div id="title">
-    <!-- Arcadion Light-heavyweight(savage) -->
+
+  <div id="title"></div>
+
+  <!-- <div id="inputs-container" style="position: relative;">
+    <button id="toggle-inputs" style="position: absolute; left: -30px; top: 0;">&#9776;</button>
+    <div id="inputs" style="transition: margin-left 0.3s;">
+      INPUTS
+      <div id="jobs">JOBS</div>
+      <div id="roles"></div>
+    </div>
+  </div> -->
+  <div id="inputs">
+    <div id="jobs"></div>
+    <div id="roles"></div>
   </div>
+  <div class="title">
+    <h3>MATERIALS</h3>
+  </div>
+  <div id="timetable"><img src="740gt.png" alt="gathering-time"></div>
+  <div id="materials">
+    <!-- <div class="materials main">Main</div> -->
+    <!-- <div class="materials sub">Sub</div> -->
+  </div>
+
+  <script src="script/main.js"></script>
 
 </body>
 </html>
