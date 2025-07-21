@@ -75,18 +75,7 @@ function AddMaterial(row, materials, pidx, need, idx = '') {
   // 보유
   const tStock = document.createElement('td');
   // You can fill td with data if needed
-  const fill = document.createElement('input');
-  fill.type = 'number';
-  // fill.name = `${GEAR_TYPES[i]} ${SLOT_NAMES[j]}`;
-  fill.name = `stock_${pidx}_${idx}`;
-  fill.min = 0;
-  fill.placeholder = 0;
-
-  let value = localStorage.getItem(fill.name);
-  if (isNaN(value) || value === null) { }
-  else {
-    fill.value = Number(value);
-  }
+  const fill = createInput(`stock_${pidx}_${idx}`);
   tStock.appendChild(fill);
   row.appendChild(tStock);
 
@@ -154,18 +143,7 @@ function MaterialTable() {
       const tStock = document.createElement('td');
       tStock.rowSpan = rowspan;
       // You can fill td with data if needed
-      const fill = document.createElement('input');
-      fill.type = 'number';
-      // fill.name = `${GEAR_TYPES[i]} ${SLOT_NAMES[j]}`;
-      fill.name = `stock_${ingredients[i].material}`;
-      fill.min = 0;
-      fill.placeholder = 0;
-
-      let value = localStorage.getItem(fill.name);
-      if (isNaN(value) || value === null) { }
-      else {
-        fill.value = Number(value);
-      }
+      const fill = createInput(`stock_${ingredients[i].material}`);
       tStock.appendChild(fill);
       row.appendChild(tStock);
 
@@ -199,57 +177,31 @@ document.addEventListener("DOMContentLoaded", function () {
   RoleTable();
 
   UpdateNeeds();
-
   MaterialTable();
 });
 
 // Custom event dispatcher for input value changes
-document.addEventListener('input', function (e) {
-  if (e.target && e.target.tagName === 'INPUT' && e.target.type === 'number') {
-    const customEvent = new CustomEvent('roleInputChanged', {
-      detail: {
-        input: e.target,
-        // previousValue: e.target.previousValue,
-        value: e.target.value,
-        name: e.target.name,
-      }
-    });
+// document.addEventListener('input', function (e) {
+//   if (e.target && e.target.tagName === 'INPUT' && e.target.type === 'number') {
+//     console.log(e);
 
-    const section = e.target.closest('table').className;
-    let value = 0;
-    let storage_name = '';
-    if (section === 'role-table') {
-      const td = e.target.closest('td');
-      const tr = e.target.closest('tr');
-      let row = Array.from(tr.parentNode.children).indexOf(tr);
-      let col = Array.from(tr.children).indexOf(td) - 1; // -1 because first cell is <th>
-      // // let input = customEvent.detail.input;
-      // customEvent.detail.row = row;
-      // customEvent.detail.col = col;
-      // document.dispatchEvent(customEvent);
-      value = customEvent.detail.value;
-      storage_name = `needs_${row}_${col}`;
-      // localStorage.setItem(storage_name, value);
-    }
-    else {
-      value = customEvent.detail.value;
-      storage_name = e.target.name;
-      // localStorage.setItem(storage_name, value);
-    }
+//     const section = e.target.closest('table').className;
+//     let value = e.target.value;
+//     let storage_name = e.target.name;
 
-    // Check if value is a valid, finite, positive number // (!isNaN(value) && isFinite(value) && Number(value) > 0)
-    if (!isNaN(value) && Number(value) > 0) {
-      localStorage.setItem(storage_name, value);
-    }
-    else {
-      e.target.value = null; // removeAttribute('value');
-      localStorage.removeItem(storage_name);
-    }
+//     // Check if value is a valid, finite, positive number // (!isNaN(value) && isFinite(value) && Number(value) > 0)
+//     if (!isNaN(value) && Number(value) > 0) {
+//       localStorage.setItem(storage_name, value);
+//     }
+//     else {
+//       e.target.value = null; // removeAttribute('value');
+//       localStorage.removeItem(storage_name);
+//     }
 
-    UpdateNeeds();
-    MaterialTable();
-  }
-});
+//     UpdateNeeds();
+//     MaterialTable();
+//   }
+// });
 
 // Example usage: Listen for the custom event elsewhere
 // document.addEventListener('roleInputChanged', function(e) {

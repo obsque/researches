@@ -18,6 +18,60 @@ const ACC_TYPES = [
 ];
 const SLOT_NAMES = [ '머리', '몸통', '손', '다리', '발', '귀', '목', '팔', '반지' ];
 
+function updateValue(name) {
+  if (!isNaN(value) && Number(value) > 0) {
+    localStorage.setItem(name, value);
+  } else {
+    e.target.value = null;
+    localStorage.removeItem(name);
+  }
+
+  UpdateNeeds();
+  MaterialTable();
+}
+
+function valueChange(e) {
+  const value = e.target.value;
+  if (!isNaN(value) && Number(value) > 0) {
+    localStorage.setItem(e.target.name, value);
+  } else {
+    e.target.value = null;
+    localStorage.removeItem(e.target.name);
+  }
+
+  UpdateNeeds();
+  MaterialTable();
+};
+
+function createInput(name) {
+  const obj = document.createElement('input');
+  obj.type = 'number';
+  obj.min = 0;
+  obj.placeholder = 0;
+
+  obj.name = name;
+  let value = localStorage.getItem(obj.name);
+  // if (isNaN(value) || value === null) { }
+  if(value){
+    obj.value = Number(value);
+  }
+  obj.onchange = valueChange;
+  obj.addEventListener('clear', valueChange);
+  // function (e) {
+  //   const value = e.target.value;
+  //   if (!isNaN(value) && Number(value) > 0) {
+  //     localStorage.setItem(e.target.name, value);
+  //   } else {
+  //     e.target.value = null;
+  //     localStorage.removeItem(e.target.name);
+  //   }
+
+  //   UpdateNeeds();
+  //   MaterialTable();
+  // };
+
+  return obj;
+}
 
 function RoleTable() {
   const div_roles = document.getElementById('roles');
@@ -57,19 +111,7 @@ function RoleTable() {
           td.rowSpan = 2;
         }
         // You can fill td with data if needed
-        const reserve = document.createElement('input');
-        reserve.type = 'number';
-        // fill.name = `${GEAR_TYPES[i]} ${SLOT_NAMES[j]}`;
-        reserve.name = `order`;
-        reserve.min = 0;
-        reserve.placeholder = 0;
-        reserve.onchange;
-
-        let value = localStorage.getItem(`needs_${i}_${j}`);
-        if (isNaN(value) || value === null) { }
-        else {
-          reserve.value = Number(value);
-        }
+        const reserve = createInput(`needs_${i}_${j}`);
         td.appendChild(reserve);
         row.appendChild(td);
       }
@@ -86,11 +128,7 @@ function RoleTable() {
         const inputs = tr.getElementsByTagName('input');
         Array.from(inputs).forEach(element => {
           element.value = null;
-          const event = new Event("input");
-          event.target = {
-            tagName: 'INPUT',
-            type: 'number',
-          };
+          const event = new Event("clear");
           element.dispatchEvent(event);
         });
       }
