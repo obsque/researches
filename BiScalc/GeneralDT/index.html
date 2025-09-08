@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>sks_mod 변화 표</title>
+<title>equipments</title>
     <!-- <link rel="stylesheet" href="style/main.css"> -->
     <style>
         body {
@@ -84,8 +84,8 @@
         </div>
         <div id="weapon"></div>
         <div id="equipment">
-            <div id="armor left-side"></div>
-            <div id="accs right-side"></div>
+            <div id="armor"></div>
+            <div id="accs"></div>
         </div>
         <div id="food"></div>
         <script>
@@ -114,16 +114,16 @@
                 // const target = document.getElementById('main-container');
                 CreateBlock('weapon', 'weapon');
                 // CreateBlock('weapon', 'off');
-                CreateBlock('left-side', 'head');
-                CreateBlock('left-side', 'body');
-                CreateBlock('left-side', 'hand');
-                CreateBlock('left-side', 'legs');
-                CreateBlock('left-side', 'feet');
-                CreateBlock('right-side', 'ears');
-                CreateBlock('right-side', 'neck');
-                CreateBlock('right-side', 'wrist');
-                CreateBlock('right-side', 'ring-right');
-                CreateBlock('right-side', 'ring-left');
+                CreateBlock('armor', 'head');
+                CreateBlock('armor', 'body');
+                CreateBlock('armor', 'hand');
+                CreateBlock('armor', 'legs');
+                CreateBlock('armor', 'feet');
+                CreateBlock('accs', 'ears');
+                CreateBlock('accs', 'neck');
+                CreateBlock('accs', 'wrist');
+                CreateBlock('accs', 'ring-right');
+                CreateBlock('accs', 'ring-left');
                 CreateBlock('food', 'food');
             });
 
@@ -132,6 +132,7 @@
     </div>
 
     <script defer>
+
     </script>
 </body>
 </html>

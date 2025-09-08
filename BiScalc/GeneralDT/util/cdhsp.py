@@ -124,14 +124,14 @@ class StatsCalc(Stats):
     #     calc = StatsCalc(levelmod)
     #     GCDmod = calc.sks_mod(sks, GCD)
     #     result = attr
-    def ExpDmgSum(self):
+    def ExpDmgMult(self, sum):
         # calc = StatsCalc(levelmod)
-        result = 10000
+        result = sum['attr']
         result *= self.dh_exDmg(sum['dh'])
         result *= self.crit_exDmg(sum['crit'])
         result *= self.det_exDmg(sum['det'])
         result *= self.sks_exDmg(sum['sks'])
-        result *= self.ten_exDmg(sum['tncpt'])
+        # result *= self.ten_exDmg(sum['tncpt'])
         # GCDmod = self.sks_mod(self, sum['sks'], GCD)
         # result *= self.haste_exDmg(sum['haste'], GCDmod)
         return result
