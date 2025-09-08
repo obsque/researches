@@ -3,18 +3,18 @@
 }
 
 input[type=number] {
+  display: flex;
+  border: none;
   height: 100%;
+  width: 100%;
   text-align: center;
   color: #ffe;
   font-size: large;
   text-shadow: black 0px 0px 10px;
   /* text-shadow: #FDA 0px 0px 1px; */
   /* text-shadow: rgba(0,0,0,0.8) 0px 0px 2px; */
-  display: flex;
   margin: auto;
   padding: 0.25em;
-  width: 2em;
-  border: none;
   /* background-color: rgba(255,255,255,0.5); */
   background-color: transparent;
   appearance: textfield;

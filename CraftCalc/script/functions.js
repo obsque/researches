@@ -18,17 +18,7 @@ const ACC_TYPES = [
 ];
 const SLOT_NAMES = [ '머리', '몸통', '손', '다리', '발', '귀', '목', '팔', '반지' ];
 
-function updateValue(name) {
-  if (!isNaN(value) && Number(value) > 0) {
-    localStorage.setItem(name, value);
-  } else {
-    e.target.value = null;
-    localStorage.removeItem(name);
-  }
 
-  UpdateNeeds();
-  MaterialTable();
-}
 
 function valueChange(e) {
   const value = e.target.value;
@@ -57,18 +47,6 @@ function createInput(name) {
   }
   obj.onchange = valueChange;
   obj.addEventListener('clear', valueChange);
-  // function (e) {
-  //   const value = e.target.value;
-  //   if (!isNaN(value) && Number(value) > 0) {
-  //     localStorage.setItem(e.target.name, value);
-  //   } else {
-  //     e.target.value = null;
-  //     localStorage.removeItem(e.target.name);
-  //   }
-
-  //   UpdateNeeds();
-  //   MaterialTable();
-  // };
 
   return obj;
 }
