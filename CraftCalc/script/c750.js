@@ -4,14 +4,12 @@ const SLOTS = [
   'x주', 'y보조',
 ];
 const JOBS = [
-  '1수호자', '2학살자', '3타격대', '4정찰대', '5유격대', '6마술사', '7치유사',
-  '1수호자', '2공격대', '3유격대', '4마술사', '5치유사',
+  '1대장', '2목수', '3갑주', '4보석',
+  '5가죽', '6재봉', '7연금', '8요리',
+  'a광부', 'b원예', 'c어부',
   '#',
-  "PLD", "WAR", "DRK", "GNB",
-  "WHM", "SCH", "AST", "SGE",
-  "MNK", "DRG", "NIN", "SAM", "RPR", "VPR",
-  "BRD", "MCH", "DNC",
-  "BLM", "SMN", "RDM", "PIC"
+  "제작",
+  "채집",
 ];
 
 class Recipe {
@@ -67,7 +65,7 @@ const csvdata =
 14,대장,x주,3갑주,3,Craftsman's Tri-solution,3,옥타헤드라이트 덩어리,2,크로노피오 가죽,3,Mason's Abrasive
 15,대장,z보조,3갑주,3,Desert Lapis,4,옥타헤드라이트 덩어리,1,능망간석,3,Mason's Abrasive
 16,대장,x주,4보석,3,Craftsman's Tri-solution,3,옥타헤드라이트 덩어리,2,능망간석,3,Mason's Abrasive
-1,목수,z보조,4보석,3,Desert Lapis,3,개송양나무 목재,2,Rhodochrosite,3,Mason's Abrasive
+1,목수,z보조,4보석,3,Desert Lapis,3,개송양나무 목재,2,능망간석,3,Mason's Abrasive
 17,대장,x주,5가죽,3,Craftsman's Tri-solution,4,옥타헤드라이트 덩어리,1,개송양나무 목재,3,Mason's Abrasive
 18,대장,z보조,5가죽,3,Desert Lapis,3,옥타헤드라이트 덩어리,2,크로노피오 가죽,3,Mason's Abrasive
 27,보석,x주,6재봉,3,Craftsman's Tri-solution,3,능망간석,2,옥타헤드라이트 덩어리,3,Mason's Abrasive
@@ -81,24 +79,24 @@ const csvdata =
 23,대장,x주,b원예,3,Craftsman's Tri-solution,3,옥타헤드라이트 덩어리,2,개송양나무 목재,3,Mason's Abrasive
 24,대장,z보조,b원예,3,Desert Lapis,3,옥타헤드라이트 덩어리,2,크로노피오 가죽,3,Mason's Abrasive
 3,목수,x주,c어부,3,Craftsman's Tri-solution,3,개송양나무 목재,2,옥타헤드라이트 덩어리,3,Mason's Abrasive
-32,재봉,1머리,제작,3,Craftsman's Tri-solution,2,디아트리마 모포,3,능망간석,3,Mason's Abrasive
-34,재봉,2몸통,제작,4,Craftsman's Tri-solution,5,디아트리마 모포,2,능망간석,4,Mason's Abrasive
-36,재봉,3손,제작,3,Craftsman's Tri-solution,3,디아트리마 모포,2,크로노피오 가죽,3,Mason's Abrasive
-37,재봉,4다리,제작,4,Craftsman's Tri-solution,4,디아트리마 모포,3,크로노피오 가죽,4,Mason's Abrasive
-31,가죽,5발,제작,3,Craftsman's Tri-solution,3,크로노피오 가죽,2,디아트리마 모포,3,Mason's Abrasive
+32,재봉,1머리,제작,3,Craftsman's Tri-solution,2,디아트리마 펠트,3,능망간석,3,Mason's Abrasive
+34,재봉,2몸통,제작,4,Craftsman's Tri-solution,5,디아트리마 펠트,2,능망간석,4,Mason's Abrasive
+36,재봉,3손,제작,3,Craftsman's Tri-solution,3,디아트리마 펠트,2,크로노피오 가죽,3,Mason's Abrasive
+37,재봉,4다리,제작,4,Craftsman's Tri-solution,4,디아트리마 펠트,3,크로노피오 가죽,4,Mason's Abrasive
+31,가죽,5발,제작,3,Craftsman's Tri-solution,3,크로노피오 가죽,2,디아트리마 펠트,3,Mason's Abrasive
 4,목수,a귀,제작,2,Desert Lapis,2,개송양나무 목재,2,옥타헤드라이트 덩어리,2,Mason's Abrasive
 28,보석,b목,제작,2,Desert Lapis,2,옥타헤드라이트 덩어리,2,개송양나무 목재,2,Mason's Abrasive
 6,목수,c팔,제작,2,Desert Lapis,2,개송양나무 목재,2,옥타헤드라이트 덩어리,2,Mason's Abrasive
-8,목수,d반지,제작,2,Desert Lapis,2,개송양나무 목재,1,Rhodochrosite,2,Mason's Abrasive
-33,재봉,1머리,채집,3,Craftsman's Tri-solution,4,디아트리마 모포,1,크로노피오 가죽,3,Mason's Abrasive
-35,재봉,2몸통,채집,4,Craftsman's Tri-solution,4,디아트리마 모포,3,능망간석,4,Mason's Abrasive
-30,가죽,3손,채집,3,Craftsman's Tri-solution,3,크로노피오 가죽,2,디아트리마 모포,3,Mason's Abrasive
-38,재봉,4다리,채집,4,Craftsman's Tri-solution,4,디아트리마 모포,3,크로노피오 가죽,4,Mason's Abrasive
-32,가죽,5발,채집,3,Craftsman's Tri-solution,4,크로노피오 가죽,1,디아트리마 모포,3,Mason's Abrasive
+8,목수,d반지,제작,2,Desert Lapis,2,개송양나무 목재,1,능망간석,2,Mason's Abrasive
+33,재봉,1머리,채집,3,Craftsman's Tri-solution,4,디아트리마 펠트,1,크로노피오 가죽,3,Mason's Abrasive
+35,재봉,2몸통,채집,4,Craftsman's Tri-solution,4,디아트리마 펠트,3,능망간석,4,Mason's Abrasive
+30,가죽,3손,채집,3,Craftsman's Tri-solution,3,크로노피오 가죽,2,디아트리마 펠트,3,Mason's Abrasive
+38,재봉,4다리,채집,4,Craftsman's Tri-solution,4,디아트리마 펠트,3,크로노피오 가죽,4,Mason's Abrasive
+32,가죽,5발,채집,3,Craftsman's Tri-solution,4,크로노피오 가죽,1,디아트리마 펠트,3,Mason's Abrasive
 5,목수,a귀,채집,2,Desert Lapis,2,개송양나무 목재,2,옥타헤드라이트 덩어리,2,Mason's Abrasive
 29,보석,b목,채집,2,Desert Lapis,2,옥타헤드라이트 덩어리,2,개송양나무 목재,2,Mason's Abrasive
 7,목수,c팔,채집,2,Desert Lapis,2,개송양나무 목재,2,옥타헤드라이트 덩어리,2,Mason's Abrasive
-9,목수,d반지,채집,2,Desert Lapis,2,개송양나무 목재,1,Rhodochrosite,2,Mason's Abrasive
+9,목수,d반지,채집,2,Desert Lapis,2,개송양나무 목재,1,능망간석,2,Mason's Abrasive
 `;
 
 const craft_DB = ReadData(csvdata);
