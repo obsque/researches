@@ -1,0 +1,105 @@
+<!DOCTYPE html charset="UTF-8" viewport="width=device-width, initial-scale=1.0">
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Timeline Example</title>
+
+  <script src="data/tdata.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .box {
+      display: grid;
+    }
+
+
+  </style>
+  <script>
+    const START_TIME = 0;
+    const MIN_PX = 120;
+  </script>
+</head>
+<body>
+  <div id="title"></div>
+
+  <div id="box1" class="container"></div>
+  <div id="box2" class="container"></div>
+  <div id="box3" class="container"></div>
+  <div id="box4" class="container"></div>
+
+  <script>
+    function AddDataToTimeLine(tag, timebox, data) {
+      data.forEach(entry => {
+        const tagblock = document.createElement('div');
+        tagblock.className = 'time-data';
+
+        const tdata = document.createElement('span');
+        tdata.className = 'tag time';
+        const minutes = Math.floor(entry.time / 60);
+        const seconds = entry.time % 60;
+        tdata.innerText = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        tagblock.appendChild(tdata);
+
+        const tdescription = document.createElement('span');
+        tdescription.className = 'tag description';
+        tdescription.innerText = entry.description;
+        tagblock.appendChild(tdescription);
+
+        tagblock.style.left = `${entry.time / 60 * MIN_PX}px`;
+        tag.appendChild(tagblock);
+
+        const tbar = document.createElement('div');
+        tbar.className = 'tag-line';
+        tbar.style.left = `${entry.time / 60 * MIN_PX}px`;
+
+        // timebox.appendChild(tbar);
+      });
+    }
+
+    function createTable(id, titleText, data) {
+      const target = document.getElementById(id);
+
+      const title = document.createElement('div');
+      title.className = 'title';
+      title.innerText = titleText;
+      target.appendChild(title);
+
+      const content = document.createElement('div');
+      content.className = 'content';
+      {
+        const tnote = document.createElement('div');
+        tnote.className = 'tagarea';
+        content.appendChild(tnote);
+
+        const timebox = document.createElement('div');
+        timebox.className = 'timebox';
+
+        for (let i = 0; i <= 6; i++) {
+          const block = document.createElement('div');
+          block.className = 'minute-block';
+          block.style.gridColumn = i + 1;
+          block.innerText = `${i}m`;
+
+          timebox.appendChild(block);
+        }
+        content.appendChild(timebox);
+
+        const note = document.createElement('div');
+        note.className = 'note';
+        content.appendChild(note);
+
+        let parsed = parseTimelineData(data);
+        AddDataToTimeLine(tnote, timebox, parsed);
+      }
+      target.appendChild(content);
+    }
+
+    createTable('box1', '1. 악마의 석판', B1);
+    createTable('box2', '2. 별머리 3형제', B2);
+    createTable('box3', '3. 대리석 드래곤', B3);
+    createTable('box4', '4. 마기타우로스', B4);
+
+  </script>
+
+
+</body>
+</html>
